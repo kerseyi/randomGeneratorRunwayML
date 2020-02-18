@@ -12,19 +12,6 @@ function setup() {
   //saveButton.mousePressed(saveLocally);
   
   generateButton.mousePressed(generateVector);
-
-  let firebaseConfig = {
-    apiKey: "AIzaSyDpekFiMuZ14oyqmjMIqZ1mBuHPSXUrJao",
-    authDomain: "dinogan-5d235.firebaseapp.com",
-    databaseURL: "https://dinogan-5d235.firebaseio.com",
-    projectId: "dinogan-5d235",
-    storageBucket: "dinogan-5d235.appspot.com",
-    messagingSenderId: "446090199932",
-    appId: "1:446090199932:web:4aba81e213db9820845af9",
-    measurementId: "G-R7RDZLNGYE"
-  };
-  firebase.initializeApp(firebaseConfig);
-  database = firebase.database();
 }
 
 function draw() {
@@ -77,27 +64,6 @@ const inputs = {
   })
 }
 
-
-function saveDrawing(outputs){
-  let submitTime = month() + "/" + day() +" " + hour() + ":"+ minute();
-  let dataURL = outputs.image;
-  firebase.auth().signInAnonymously().catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // ...
-  });
-  let ref= database.ref('drawings');
-  let data = {
-    drawing: dataURL,
-    time: submitTime
-  }
-  let result = ref.push(data, dataSent);
-  console.log(result.key);
-  function dataSent(err, status) {
-    console.log(status);
-  }
-}
 
 /*function saveLocally() {
   var allImages = document.getElementsByTagName('img');
